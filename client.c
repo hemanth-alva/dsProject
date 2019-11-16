@@ -1,16 +1,16 @@
 #include "header.h"
 
-void menu();
+int menu();
 
-void main()
+int main()
 {	
 	menu();
 }
 
-void menu()
+int menu()
 {
 	int option;
-	flight * pq=NULL;
+	//flight * pq=NULL;
 
 	do{
 		printf("%s\n","Choose an option 1-Insert flight record \n2-Display flight going to use runway\n3-Display all records\n4-delete record\n5-reset");
@@ -18,26 +18,27 @@ void menu()
 		switch(option)
 		{
 			case 1:
-				pq=insert(pq);
+				insert();
 				break;
 
-			case 2:
+			/*case 2:
 				pq=displayPriority(pq);
+				break;*/
+
+			case 2:
+				display();
 				break;
 
 			case 3:
-				pq=display(pq);
+				deletePriority();
 				break;
 
 			case 4:
-				pq=deletePriority(pq);
-				break;
-
-			case 5:
-				pq=destroy(pq);
+				destroy();
 				break;
 		}
 	}while(option!=0);
+	return 0;
 }
 
 
