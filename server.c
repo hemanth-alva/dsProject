@@ -1,5 +1,6 @@
 #include "header.h"
 
+flight *head = NULL;
 
 flight * init_node()
 {
