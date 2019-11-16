@@ -5,51 +5,91 @@ flight * init_node()
 {
 	flight * newFlight=(flight*)malloc(sizeof(flight));
 	printf("Enter the info\n");
-	printf("%s\t","Flight Number" ); scanf("%d",newFlight->flightNumber);
-	printf("\n%s\t","1-Landing 2-Takeoff"); scanf("%d",&newFlight->task);
-	if(&newFlight->task==1)
-		printf("%s\n","Enter Source" );
-	else
-		printf("%s\n","Enter Destination" );
+	printf("Flight Number: " ); scanf("%s",newFlight->flightNumber);
+	printf("1-Landing 2-Takeoff :"); scanf("%d",&newFlight->task);
+	printf("Enter Source and destination :" );
 	scanf("%s",newFlight->sd);
-	printf("%s\n","Enter Distance" );
-	scanf("%d",newFlight->distance);
-	printf("%s\n","Enter Priority" );
-	scanf("%d",newFlight->priority);
+	printf("Enter Distance: " );
+	scanf("%d",&newFlight->distance);
+	printf("Enter Priority: " );
+	scanf("%d",&newFlight->priority);
 	newFlight->link=NULL;
+	return newFlight;
 }
 
-flight_list* insert(flight_list * list)
+flight* insert()
 {	
 	flight * newFlight=init_node();
-	if(flight_list->head==NULL)
+	flight * q;
+	if(head == NULL || newFlight->priority > head->priority)
 	{
-		flight_list->head=flight;
-		flight_list->tail=flight;
+		newFlight->link = head;
+		head = newFlight;
 	}
-	else()
+	else
 	{
-		flight_list->tail->link=newFlight;
-		flight_list->tail=newFlight;
+		q = head;
+		while(q->link != NULL && q->link->priority >= newFlight->priority )
+			q = q->link;
+		newFlight->link = q->link;
+		q->link = newFlight;
+	}	
+	return head;
+}
+
+void deletePriority()
+{
+	flight *temp;
+	if(head == NULL)
+		printf("Queue Underflow\n");
+	else
+	{
+		temp = head;
+		printf("Deleted item is %s\n",temp->flightNumber);
+		if(temp->task ==1 )
+			printf("Landing\t");
+		else
+			printf("Takeoff\t");
+		printf("%s\t,%d\n",temp->sd,temp->distance);
+		head = head->link;
+		free(temp);
 	}
 }
 
-flight* deletePriority()
+/*flight* displayPriority()
 {
+
+}*/
+
+void display()
+{
+	flight *ptr;
+	ptr = head;
+	if(head == NULL)
+		printf("Queue is empty\n");
+	else 
+	{
+		while(ptr != NULL)
+		{
+		printf("Flight Number is: %s\n",ptr->flightNumber);
+		if(ptr->task ==1 )
+			printf("Landing\t");
+		else
+			printf("Takeoff\t");
+		printf("%s\t,%d\n",ptr->sd,ptr->distance);
+		ptr = ptr->link;
+		}
+	}
 
 }
 
-flight* displayPriority()
+void destroy()
 {
-
-}
-
-flight* display()
-{
-
-}
-
-flight* destroy()
-{
-
+	flight *temp = head;
+	while (temp != NULL)
+	{
+		head= head->link;
+		free(temp);
+		temp = head;		
+	}
 }
