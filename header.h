@@ -11,7 +11,7 @@ typedef struct flight
 	struct flight * link;
 }flight;
 
-flight *head = NULL;
+//flight *head = NULL;
 
 
 flight * insert();
