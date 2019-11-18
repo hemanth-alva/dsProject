@@ -1,4 +1,5 @@
 #include "header.h"
+flight *head = NULL;
 
 
 flight * init_node()
@@ -58,7 +59,6 @@ void deletePriority()
 
 /*flight* displayPriority()
 {
-
 }*/
 
 void display()
